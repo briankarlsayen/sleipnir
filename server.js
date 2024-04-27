@@ -2,8 +2,11 @@ import express from "express";
 import { rateLimit } from "express-rate-limit";
 import { sendEmail } from "./utilities/sendEmail.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import cors from "cors";
+import "dotenv/config";
+
 const app = express();
-const PORT = "5201";
+const PORT = process.env.PORT || "5201";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -15,6 +18,7 @@ const limiter = rateLimit({
   },
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(limiter);
 
