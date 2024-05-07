@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 app.post("/sendmail", async (req, res) => {
   const { to, from, subject, message } = req.body;
   try {
-    if (!to || !subject || !message)
+    if (!to || !subject || !message || !from)
       return res.status(422).json({ message: "Invalid input" });
     const options = {
       to, // email to be sent
